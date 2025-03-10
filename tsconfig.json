@@ -1,7 +1,16 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["src/**/*", "types.d.ts"],
+  "compilerOptions": {
+    "target": "es2016", 
+    "module": "commonjs",
+    "jsx": "react",
+    "rootDir": ".",
+    "baseUrl": "app/javascript",
+    "noEmit": true ,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "strict": true,
+    "skipLibCheck": true 
+  }
 }

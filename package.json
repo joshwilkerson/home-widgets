@@ -10,6 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@planningcenter/icons": "^15.19.1",
+    "@planningcenter/tapestry": "^0.4.1",
+    "@planningcenter/tapestry-react": "^4.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -22,8 +27,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "path": "^0.12.7",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.0",
+    "url": "^0.11.4",
     "vite": "^6.2.1"
   }
 }

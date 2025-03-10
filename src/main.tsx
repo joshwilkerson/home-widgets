@@ -1,10 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import React, { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import App from "./App"
+import { ThemeProvider } from "@planningcenter/tapestry-react"
+import theme from "./theme"
 
-createRoot(document.getElementById('root')!).render(
+import "@planningcenter/tapestry/dist/tokens.css"
+import "./main.css"
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </StrictMode>
 )
