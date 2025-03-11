@@ -1,4 +1,6 @@
-declare module "@planningcenter/icons/paths/church-center"
 declare module "@planningcenter/icons/paths/logomark"
-declare module "@planningcenter/icons/paths/people"
-declare module "@planningcenter/icons/paths/services"
+
+declare module "@planningcenter/react-beautiful-dnd" {
+  import * as RBDND from "react-beautiful-dnd"
+  export = RBDND
+}

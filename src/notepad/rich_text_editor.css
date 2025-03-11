@@ -1,0 +1,18 @@
+trix-toolbar .trix-button-group {
+  margin-bottom: 16px;
+}
+
+trix-toolbar .trix-button {
+  border-bottom: none;
+}
+
+.trix-button-group--file-tools {
+  display: none !important;
+}
+
+trix-editor {
+  border: none;
+  padding: 0;
+  max-height: 240px;
+  overflow: auto;
+}
