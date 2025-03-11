@@ -6,11 +6,14 @@ import theme from "./theme"
 
 import "@planningcenter/tapestry/dist/tokens.css"
 import "./main.css"
+import { DashboardProvider } from "./dashboard_context"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <DashboardProvider>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </DashboardProvider>
   </StrictMode>
 )

@@ -9,6 +9,7 @@ import {
 } from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
 import { Modal } from "./modal"
+import { useDashboard } from "./dashboard_context" // import the dashboard context
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -25,7 +26,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-const Header = () => {
+const Header = ({ onOpenModal }: { onOpenModal: () => void }) => {
   return (
     <StackView
       axis="horizontal"
@@ -44,6 +45,7 @@ const Header = () => {
           size: "md",
         }}
         size="md"
+        onClick={onOpenModal}
       />
     </StackView>
   )
@@ -88,7 +90,17 @@ const WidgetContainer = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-const Widget = ({ children }: { children: React.ReactNode }) => {
+const Widget = ({
+  children,
+  id,
+  onEdit,
+  title,
+}: {
+  children: React.ReactNode
+  id: string
+  onEdit: (id: string) => void
+  title: string
+}) => {
   const WidgetHeader = () => {
     return (
       <StackView
@@ -99,9 +111,8 @@ const Widget = ({ children }: { children: React.ReactNode }) => {
       >
         <StackView axis="horizontal" spacing={1} alignment="center" flex={1}>
           <Logo name="home" size="lg" markOnly theme="color" />
-
           <Heading size={1} level={2} fontWeight={600} truncate>
-            Widget title
+            {title}
           </Heading>
         </StackView>
         <StackView axis="horizontal">
@@ -113,6 +124,7 @@ const Widget = ({ children }: { children: React.ReactNode }) => {
               color: token("--t-fill-color-neutral-030"),
             }}
             variant="naked"
+            onClick={() => onEdit(id)}
           />
           <Button
             title="Rearrange Widget"
@@ -121,22 +133,12 @@ const Widget = ({ children }: { children: React.ReactNode }) => {
               size: "16px",
               color: token("--t-icon-color-default-dim"),
             }}
-            data-widget="drag-handle"
             variant="naked"
-            css={{
-              cursor: "grab",
-              "&:hover": {
-                background: "transparent",
-              },
-            }}
+            disabled={true}
           />
         </StackView>
       </StackView>
     )
-  }
-
-  const WidgetBody = ({ children }: { children: React.ReactNode }) => {
-    return <Box padding={2}>{children}</Box>
   }
 
   return (
@@ -146,24 +148,50 @@ const Widget = ({ children }: { children: React.ReactNode }) => {
       boxShadow="0 0 0 1px rgba(0, 0, 0, 0.04), 0 4px 3px 0 rgba(0, 0, 0, 0.04);"
     >
       <WidgetHeader />
-      <WidgetBody>{children}</WidgetBody>
+      <Box padding={2}>{children}</Box>
     </StackView>
   )
 }
 
 function App() {
+  const { widgets } = useDashboard()
   const [isModalOpen, setIsModalOpen] = useState(true)
+  const [selectedWidget, setSelectedWidget] = useState<string | null>(null)
+
+  const openModalForNewWidget = () => {
+    setSelectedWidget(null)
+    setIsModalOpen(true)
+  }
+
+  const openModalForEdit = (widgetId: string) => {
+    setSelectedWidget(String(widgetId))
+    setIsModalOpen(true)
+  }
+
   return (
     <>
       {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)} widget="Notepad" />
+        <Modal
+          onClose={() => {
+            setIsModalOpen(false)
+            setSelectedWidget(null)
+          }}
+          widgetId={selectedWidget || ""}
+        />
       )}
       <Wrapper>
-        <Header />
+        <Header onOpenModal={openModalForNewWidget} />
         <WidgetContainer>
-          <Widget>widget</Widget>
-          <Widget>widget</Widget>
-          <Widget>widget</Widget>
+          {widgets.map((widget) => (
+            <Widget
+              key={widget.id}
+              id={widget.id}
+              onEdit={openModalForEdit}
+              title={widget.title}
+            >
+              {widget.content}
+            </Widget>
+          ))}
         </WidgetContainer>
       </Wrapper>
     </>
