@@ -55,11 +55,13 @@ export const LinkDisplay = ({
           title="Edit link"
           icon={{ name: "general.pencil" }}
           onClick={onEdit}
+          tooltip={{ title: "Edit link", placement: "top" }}
         />
         <Button
           title="Delete link"
           icon={{ name: "general.trash" }}
           onClick={onRemove}
+          tooltip={{ title: "Remove link", placement: "top" }}
         />
       </StackView>
     </StackView>
