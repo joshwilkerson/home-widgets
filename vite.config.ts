@@ -5,7 +5,13 @@ import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://joshwilkerson.github.io/home-widgets/"
+    : "./"
+
 export default defineConfig({
+  base: baseURL,
   plugins: [react()],
   resolve: {
     alias: {
