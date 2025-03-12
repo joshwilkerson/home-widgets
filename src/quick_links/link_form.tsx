@@ -1,11 +1,5 @@
 import React, { useState } from "react"
-import {
-  Button,
-  StackView,
-  Input,
-  Icon,
-  Text,
-} from "@planningcenter/tapestry-react"
+import { Button, StackView, Input, Text } from "@planningcenter/tapestry-react"
 import { LinkIconDropdown } from "./link_icon_dropdown"
 import { token } from "@planningcenter/tapestry"
 import { v4 as uuid } from "uuid"
@@ -20,7 +14,7 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
   const generatedId = uuid()
 
   const urlPattern =
-    /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i
+    /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i
   const isValidUrl = urlPattern.test(url)
   const canSave = displayName !== "" && url !== ""
 
@@ -43,19 +37,6 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
       <StackView axis="vertical" spacing={2} flex={1}>
         <StackView axis="vertical" spacing={0.5}>
           <Input.InputLabel size="14px" fontWeight={500}>
-            Display Name
-          </Input.InputLabel>
-          <Input
-            autoFocus={true}
-            value={displayName}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setDisplayName(e.target.value)
-            }
-            placeholder="Link display name"
-          />
-        </StackView>
-        <StackView axis="vertical" spacing={0.5}>
-          <Input.InputLabel size="14px" fontWeight={500}>
             URL
           </Input.InputLabel>
           <Input.InputBox
@@ -63,6 +44,7 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
           >
             <Input.InputField
               placeholder="Link URL"
+              autoFocus={true}
               value={url}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setUrl(e.target.value)
@@ -73,25 +55,22 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
             />
           </Input.InputBox>
           {attemptedSubmit && !isValidUrl && (
-            <StackView
-              axis="horizontal"
-              spacing={1}
-              backgroundColor={token("--t-fill-color-status-error-ghost")}
-              paddingVertical={0.75}
-              paddingHorizontal={1}
-              radius={4}
-              alignment="center"
-            >
-              <Icon
-                name="general.exclamationTriangle"
-                size="md"
-                color={token("--t-icon-color-status-error-primary")}
-              />
-              <Text size={4} color={token("--t-text-color-default-primary")}>
-                Must be a valid url
-              </Text>
-            </StackView>
+            <Text size={4} color={token("--t-text-color-status-error")}>
+              Must be a valid url
+            </Text>
           )}
+        </StackView>
+        <StackView axis="vertical" spacing={0.5}>
+          <Input.InputLabel size="14px" fontWeight={500}>
+            Display Name
+          </Input.InputLabel>
+          <Input
+            value={displayName}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setDisplayName(e.target.value)
+            }
+            placeholder="Link display name"
+          />
         </StackView>
       </StackView>
       <StackView axis="horizontal" spacing={1} paddingTop={3}>
