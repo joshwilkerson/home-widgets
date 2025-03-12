@@ -162,7 +162,7 @@ export const Modal = ({
       <ModalBody>
         <StackView>
           {widgetType && (
-            <StackView axis="vertical" spacing={0.5} marginBottom={2}>
+            <StackView axis="vertical" spacing={0.5} marginBottom={3}>
               <Input.InputLabel size="14px" fontWeight={500}>
                 Title
               </Input.InputLabel>
