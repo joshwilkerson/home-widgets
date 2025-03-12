@@ -167,7 +167,7 @@ export const Modal = ({
                 Title
               </Input.InputLabel>
               <Input
-                autoFocus={true}
+                autoFocus={!widgetId}
                 value={widgetTitle}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setWidgetTitle(e.target.value)
