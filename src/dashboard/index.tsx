@@ -13,7 +13,6 @@ export const Dashboard = () => {
       {isModalOpen && (
         <Modal onClose={closeModal} widgetId={selectedWidget || ""} />
       )}
-
       <DashboardHeader />
       <DashboardWidgetContainer>
         {widgets.map((widget) => (
