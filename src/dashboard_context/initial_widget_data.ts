@@ -31,6 +31,53 @@ export const initialWidgetData = [
     ],
   },
   {
+    id: "6a88a846-9bfa-403c-8dc6-f418b97eab33",
+    title: "More Links!",
+    type: "quick_links",
+    content: [
+      {
+        id: "6acca06e-d24f-470b-8a3f-8525cde73d46",
+        icon: {
+          name: "Planning Center Groups",
+          type: "image",
+          file: "/groups.png",
+        },
+        displayName: "Our Groups",
+        url: "https://groups-staging.planningcenteronline.com/O127/P33161734/groups",
+      },
+      {
+        id: "d3fbcd29-7fd9-4e95-9808-fd158270e876",
+        icon: {
+          name: "Church Center",
+          type: "image",
+          file: "/church-center.png",
+        },
+        displayName: "Church Center",
+        url: "https://carlsbad.churchcenter.com/home",
+      },
+      {
+        id: "dad53c35-3134-47ab-8a3a-b255f27b1f26",
+        icon: {
+          name: "Spotify",
+          type: "image",
+          file: "/spotify.png",
+        },
+        displayName: "Spotify",
+        url: "https://www.spotify.com",
+      },
+      {
+        id: "1b97f947-9b2f-4f07-8805-086a58bb1065",
+        icon: {
+          name: "Facebook",
+          type: "image",
+          file: "/facebook.png",
+        },
+        displayName: "Facebook",
+        url: "https://facebook.com",
+      },
+    ],
+  },
+  {
     id: "71e7a2c5-e714-4f44-85dc-b974aadb0416",
     title: "Notepad",
     type: "notepad",
