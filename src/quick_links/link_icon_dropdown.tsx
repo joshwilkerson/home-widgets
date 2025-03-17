@@ -47,10 +47,6 @@ export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
     setIsOpen(false)
   }
 
-  React.useEffect(() => {
-    console.dir(icon)
-  }, [icon])
-
   return (
     <Box ref={containerRef}>
       <Popover

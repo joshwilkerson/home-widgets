@@ -1,3 +1,5 @@
+import { baseURL } from "../config"
+
 export const initialWidgetData = [
   {
     id: "79330f92-2ac5-4b8b-bc28-ed4d7785aa44",
@@ -40,7 +42,7 @@ export const initialWidgetData = [
         icon: {
           name: "Planning Center Groups",
           type: "image",
-          file: "/groups.png",
+          file: `${baseURL}/groups.png`,
         },
         displayName: "Our Groups",
         url: "https://groups-staging.planningcenteronline.com/O127/P33161734/groups",
@@ -50,7 +52,7 @@ export const initialWidgetData = [
         icon: {
           name: "Church Center",
           type: "image",
-          file: "/church-center.png",
+          file: `${baseURL}/church-center.png`,
         },
         displayName: "Church Center",
         url: "https://carlsbad.churchcenter.com/home",
@@ -60,7 +62,7 @@ export const initialWidgetData = [
         icon: {
           name: "Spotify",
           type: "image",
-          file: "/spotify.png",
+          file: `${baseURL}/spotify.png`,
         },
         displayName: "Spotify",
         url: "https://www.spotify.com",
@@ -70,7 +72,7 @@ export const initialWidgetData = [
         icon: {
           name: "Facebook",
           type: "image",
-          file: "/facebook.png",
+          file: `${baseURL}/facebook.png`,
         },
         displayName: "Facebook",
         url: "https://facebook.com",

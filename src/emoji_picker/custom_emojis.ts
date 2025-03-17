@@ -1,3 +1,5 @@
+import { baseURL } from "../config"
+
 const logosPlanningCenter = [
   {
     name: "Planning Center",
@@ -125,7 +127,7 @@ export const customEmojis = [
       keywords: logo.keywords,
       skins: [
         {
-          src: logo.file,
+          src: `${baseURL}${logo.file}`,
         },
       ],
     })),
@@ -139,7 +141,7 @@ export const customEmojis = [
       keywords: logo.keywords,
       skins: [
         {
-          src: logo.file,
+          src: `${baseURL}${logo.file}`,
         },
       ],
     })),

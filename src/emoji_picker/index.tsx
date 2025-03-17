@@ -3,6 +3,7 @@ import { Box } from "@planningcenter/tapestry-react"
 import data from "@emoji-mart/data"
 import Picker from "@emoji-mart/react"
 import { customEmojis } from "./custom_emojis"
+import { baseURL } from "../config"
 
 export type Emoji = {
   id: string
@@ -10,12 +11,6 @@ export type Emoji = {
   native?: string
   keywords?: string[]
   src?: string
-}
-
-const customCategoryIcons = {
-  web: {
-    src: "/custom-tab.svg",
-  },
 }
 
 export const EmojiPicker = ({ onChange }: { onChange: (e: Emoji) => void }) => {
@@ -41,7 +36,11 @@ export const EmojiPicker = ({ onChange }: { onChange: (e: Emoji) => void }) => {
         theme="light"
         autoFocus={true}
         custom={customEmojis}
-        categoryIcons={customCategoryIcons}
+        categoryIcons={{
+          web: {
+            src: `${baseURL}/custom-tab.svg`,
+          },
+        }}
         categories={[
           "planning-center",
           "web",
