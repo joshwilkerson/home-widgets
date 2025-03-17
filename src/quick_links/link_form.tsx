@@ -97,7 +97,7 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
                 }
               }}
               onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                if (e.target.value !== prevUrlRef.current) {
+                if (!icon.name && e.target.value !== prevUrlRef.current) {
                   prevUrlRef.current = e.target.value
                   attemptToMatchLogoFromUrl(e.target.value)
                 }
