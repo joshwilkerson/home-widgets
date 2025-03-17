@@ -4,14 +4,11 @@ import { token } from "@planningcenter/tapestry"
 import { EmojiPicker } from "../emoji_picker"
 import type { Emoji } from "../emoji_picker"
 import { DisplayImage } from "../display_image"
+import { defaultLinkIcon, type Link } from "../quick_links"
 
 interface LinkIconDropdownProps {
-  icon: { name: string; type: "emoji" | "image"; file?: string }
-  setIcon: (icon: {
-    name: string
-    type: "emoji" | "image"
-    file?: string
-  }) => void
+  icon: Link["icon"]
+  setIcon: (icon: Link["icon"]) => void
 }
 
 const useOutsideClick = (
@@ -67,6 +64,7 @@ export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
             }}
             height={4}
           >
+            {!icon.name && defaultLinkIcon.name}
             {icon.type === "emoji" ? (
               <Box>{icon.name}</Box>
             ) : (

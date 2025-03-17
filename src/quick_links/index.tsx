@@ -13,3 +13,5 @@ export interface QuickLinks {
   content: Link[]
   setContent: (newContent: Link[]) => void
 }
+
+export const defaultLinkIcon = { name: "🔗", type: "emoji" }
