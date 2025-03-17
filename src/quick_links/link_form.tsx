@@ -3,7 +3,6 @@ import { Button, StackView, Input, Text } from "@planningcenter/tapestry-react"
 import { LinkIconDropdown } from "./link_icon_dropdown"
 import { token } from "@planningcenter/tapestry"
 import { v4 as uuid } from "uuid"
-import { link_icons } from "./link_icons"
 import type { Link } from "../quick_links"
 
 interface LinkFormProps {

@@ -4,7 +4,7 @@ export interface Link {
   url: string
   icon: {
     name: string
-    type: "emoji" | "icon" | "image" | "logo"
+    type: "emoji" | "image"
   }
 }
 
