@@ -12,7 +12,7 @@ import {
 } from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
 import { useDashboard } from "../dashboard_context/use_dashboard"
-import type { WidgetProps } from "../types"
+import type { Widget as WidgetProps } from "../widget"
 import { v4 as uuid } from "uuid"
 import { BlankState } from "../blank_state"
 import { ModalHeader } from "./modal_header"

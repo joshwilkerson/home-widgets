@@ -15,7 +15,7 @@ import {
 import { LinkDisplay } from "./link_display"
 import { LinkForm } from "./link_form"
 import { SortableItem } from "./sortable_item"
-import type { QuickLinksProps, Link } from "../types"
+import type { Link, QuickLinks } from "../quick_links"
 import {
   Button,
   Heading,
@@ -25,7 +25,7 @@ import {
 import { BlankState } from "../blank_state"
 import { token } from "@planningcenter/tapestry"
 
-export const QuickLinksForm = ({ content, setContent }: QuickLinksProps) => {
+export const QuickLinksForm = ({ content, setContent }: QuickLinks) => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } })

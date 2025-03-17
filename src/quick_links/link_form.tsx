@@ -3,11 +3,17 @@ import { Button, StackView, Input, Text } from "@planningcenter/tapestry-react"
 import { LinkIconDropdown } from "./link_icon_dropdown"
 import { token } from "@planningcenter/tapestry"
 import { v4 as uuid } from "uuid"
-import type { LinkFormProps, Link } from "../types"
 import { link_icons } from "./link_icons"
+import type { Link } from "../quick_links"
+
+interface LinkFormProps {
+  initialLink?: Link
+  onSave: (link: Link) => void
+  onCancel: () => void
+}
 
 export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
-  const [icon, setIcon] = useState(initialLink?.icon || "")
+  const [icon, setIcon] = useState(initialLink?.icon?.name || "")
   const [displayName, setDisplayName] = useState(initialLink?.displayName || "")
   const [url, setUrl] = useState(initialLink?.url || "")
   const [attemptedSubmit, setAttemptedSubmit] = useState(false)
@@ -86,7 +92,7 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
             }
             const newLink: Link = {
               id: initialLink?.id || generatedId,
-              icon: icon || link_icons[0],
+              icon: { name: icon || link_icons[0], type: "emoji" },
               displayName,
               url,
             }

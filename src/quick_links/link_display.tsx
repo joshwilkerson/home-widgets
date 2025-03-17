@@ -1,7 +1,14 @@
 import React from "react"
 import { Button, StackView, Text } from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
-import type { LinkDisplayProps } from "../types"
+import type { Link } from "../quick_links"
+
+interface LinkDisplayProps {
+  link: Link
+  onEdit: () => void
+  onRemove: () => void
+  dragHandleProps?: React.ButtonHTMLAttributes<HTMLButtonElement>
+}
 
 export const LinkDisplay = ({
   link,
@@ -32,7 +39,7 @@ export const LinkDisplay = ({
         />
       </StackView>
       <Text size="32px" inline>
-        {link.icon}
+        {link.icon.name}
       </Text>
       <StackView flex={1}>
         <Text

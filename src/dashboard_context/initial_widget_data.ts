@@ -6,25 +6,25 @@ export const initialWidgetData = [
     content: [
       {
         id: "4364dbbd-f852-46d1-ae89-350f06489afc",
-        icon: "🎉",
+        icon: { name: "🎉", type: "emoji" },
         displayName: "Upcoming Events",
         url: "https://planningcenter.com",
       },
       {
         id: "23090895-9769-472d-b7bd-c8aa2f29c9db",
-        icon: "📚",
+        icon: { name: "📚", type: "emoji" },
         displayName: "Documentation",
         url: "https://planningcenter.com",
       },
       {
         id: "64423ca7-1c28-4979-bdfa-7db8d3022583",
-        icon: "😎",
+        icon: { name: "😎", type: "emoji" },
         displayName: "Planning Center",
         url: "https://planningcenter.com",
       },
       {
         id: "e182d053-fbd7-43a2-ba67-ee7e3e4e8b37",
-        icon: "🍔",
+        icon: { name: "🍔", type: "emoji" },
         displayName: "Lunch Menu",
         url: "https://planningcenter.com",
       },

@@ -7,7 +7,17 @@ import {
   Button,
 } from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
-import type { ModalHeaderProps } from "../types"
+
+type BaseModalHeaderProps = {
+  onClose?: () => void
+  title: string
+}
+type ModalHeaderProps =
+  | (BaseModalHeaderProps & { subTitle: string; children?: never })
+  | (BaseModalHeaderProps & {
+      subTitle?: never
+      children: React.ReactElement | React.ReactElement[]
+    })
 
 const ModalTitle = ({ children }: { children: string }) => {
   return (

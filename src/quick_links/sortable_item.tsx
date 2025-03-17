@@ -1,7 +1,14 @@
 import React from "react"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import type { SortableItemProps } from "../types"
+import type { Link } from "../quick_links"
+
+export interface SortableItemProps {
+  link: Link
+  children: (
+    dragHandleProps: React.HTMLAttributes<HTMLDivElement>
+  ) => React.ReactNode
+}
 
 export const SortableItem = ({ link, children }: SortableItemProps) => {
   const {

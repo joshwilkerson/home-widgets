@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from "react"
 import { DashboardContext } from "."
 import { initialWidgetData } from "./initial_widget_data"
-import type { Widget } from "../types"
+import type { Widget } from "../widget"
 
 export const DashboardProvider: React.FC<{ children: ReactNode }> = ({
   children,
