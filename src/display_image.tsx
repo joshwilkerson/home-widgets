@@ -20,11 +20,19 @@ export const DisplayImage = ({
     ...style,
   }
 
+  const baseURL =
+    process.env.NODE_ENV === "production"
+      ? "https://joshwilkerson.github.io/home-widgets"
+      : ""
+
+  const prefixedSrc = `${baseURL}${src}`
+  const prefixedRetinaSrc = `${baseURL}${retinaSrc}`
+
   return (
     <img
-      src={src}
+      src={prefixedSrc}
       alt={alt}
-      srcSet={`${src} 1x, ${retinaSrc} 2x`}
+      srcSet={`${prefixedSrc} 1x, ${prefixedRetinaSrc} 2x`}
       style={mergedStyle}
       {...rest}
     />
