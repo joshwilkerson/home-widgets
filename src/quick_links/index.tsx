@@ -5,6 +5,7 @@ export interface Link {
   icon: {
     name: string
     type: "emoji" | "image"
+    file?: string
   }
 }
 

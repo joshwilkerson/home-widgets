@@ -3,10 +3,15 @@ import { Button, StackView, Popover, Box } from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
 import { EmojiPicker } from "../emoji_picker"
 import type { Emoji } from "../emoji_picker"
+import { DisplayImage } from "../display_image"
 
 interface LinkIconDropdownProps {
-  icon: { name: string; type: "emoji" | "image" }
-  setIcon: (icon: { name: string; type: "emoji" | "image" }) => void
+  icon: { name: string; type: "emoji" | "image"; file?: string }
+  setIcon: (icon: {
+    name: string
+    type: "emoji" | "image"
+    file?: string
+  }) => void
 }
 
 const useOutsideClick = (
@@ -36,13 +41,18 @@ export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
   useOutsideClick([containerRef, popoverRef], () => setIsOpen(false))
 
   const handleEmojiSelect = (e: Emoji) => {
+    console.dir(e)
     if (e.native !== undefined) {
       setIcon({ name: e.native, type: "emoji" })
     } else {
-      setIcon({ name: e.id, type: "image" })
+      setIcon({ name: e.name, type: "image", file: e.src })
     }
     setIsOpen(false)
   }
+
+  React.useEffect(() => {
+    console.dir(icon)
+  }, [icon])
 
   return (
     <Box ref={containerRef}>
@@ -50,13 +60,23 @@ export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
         anchorElement={
           <Button
             onClick={() => setIsOpen(!isOpen)}
-            title={icon.name || "🔗"}
             theme="default"
             variant="outline"
             iconRight={{
               name: isOpen ? "general.upCaret" : "general.downCaret",
             }}
-          />
+            height={4}
+          >
+            {icon.type === "emoji" ? (
+              <Box>{icon.name}</Box>
+            ) : (
+              <DisplayImage
+                src={icon.file ? icon.file : ""}
+                alt={icon.name}
+                size="16px"
+              />
+            )}
+          </Button>
         }
         open={isOpen}
         placement="bottom-start"

@@ -9,6 +9,7 @@ export type Emoji = {
   name: string
   native?: string
   keywords?: string[]
+  src?: string
 }
 
 const customCategoryIcons = {

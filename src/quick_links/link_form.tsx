@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button, StackView, Input, Text } from "@planningcenter/tapestry-react"
 import { LinkIconDropdown } from "./link_icon_dropdown"
 import { token } from "@planningcenter/tapestry"
@@ -20,10 +20,17 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
   const [attemptedSubmit, setAttemptedSubmit] = useState(false)
   const generatedId = uuid()
 
+  useEffect(() => {
+    if (initialLink) {
+      setIcon(initialLink.icon)
+      setDisplayName(initialLink.displayName)
+      setUrl(initialLink.url)
+    }
+  }, [initialLink])
+
   const urlPattern =
     /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i
   const isValidUrl = urlPattern.test(url)
-
   const canSave = displayName !== "" && url !== ""
 
   return (

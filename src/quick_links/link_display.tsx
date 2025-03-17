@@ -2,6 +2,7 @@ import React from "react"
 import { Button, StackView, Text } from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
 import type { Link } from "../quick_links"
+import { DisplayImage } from "../display_image"
 
 interface LinkDisplayProps {
   link: Link
@@ -38,9 +39,17 @@ export const LinkDisplay = ({
           {...dragHandleProps}
         />
       </StackView>
-      <Text size="32px" inline>
-        {link.icon.name}
-      </Text>
+      {link.icon.type === "emoji" ? (
+        <Text size="32px" inline>
+          {link.icon.name}
+        </Text>
+      ) : (
+        <DisplayImage
+          src={link.icon.file ? link.icon.file : ""}
+          size="32px"
+          alt={link.icon.name}
+        />
+      )}
       <StackView flex={1}>
         <Text
           inline
