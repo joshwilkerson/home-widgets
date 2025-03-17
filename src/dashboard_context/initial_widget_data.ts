@@ -45,7 +45,7 @@ export const initialWidgetData = [
           file: `${baseURL}/groups.png`,
         },
         displayName: "Our Groups",
-        url: "https://groups-staging.planningcenteronline.com/O127/P33161734/groups",
+        url: "https://groups.planningcenteronline.com/O127/P33161734/groups",
       },
       {
         id: "d3fbcd29-7fd9-4e95-9808-fd158270e876",
