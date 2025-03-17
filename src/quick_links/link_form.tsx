@@ -28,10 +28,14 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
     }
   }, [initialLink])
 
+  const canSave = displayName !== "" && url !== ""
+
   const urlPattern =
     /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i
+  const protocolPattern = /^(https?:\/\/)/
+
   const isValidUrl = urlPattern.test(url)
-  const canSave = displayName !== "" && url !== ""
+  const isFullUrl = protocolPattern.test(url)
 
   return (
     <StackView
@@ -71,7 +75,9 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
           </Input.InputBox>
           {attemptedSubmit && !isValidUrl && (
             <Text size={4} color={token("--t-text-color-status-error")}>
-              Must be a valid url
+              {!isFullUrl
+                ? "URL must start with https:// or http://"
+                : "Must be a valid url"}
             </Text>
           )}
         </StackView>
