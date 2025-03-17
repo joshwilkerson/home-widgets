@@ -6,6 +6,7 @@ import { NotepadWidget } from "../notepad/widget"
 import { WidgetHeader } from "./widget_header"
 import { WidgetWrapper } from "./widget_wrapper"
 import { WidgetBody } from "./widget_body"
+import { WidgetFooter } from "./widget_footer"
 
 export interface Widget {
   content: string | Link[]
@@ -28,6 +29,7 @@ export const Widget = ({ content, id, title, type }: Widget) => {
           <QuickLinksWidget content={Array.isArray(content) ? content : []} />
         )}
       </WidgetBody>
+      <WidgetFooter />
     </WidgetWrapper>
   )
 }
