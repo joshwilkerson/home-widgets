@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { Button, StackView, Input, Text } from "@planningcenter/tapestry-react"
 import { LinkIconDropdown } from "./link_icon_dropdown"
 import { token } from "@planningcenter/tapestry"
 import { v4 as uuid } from "uuid"
 import { defaultLinkIcon, type Link } from "../quick_links"
+import { logosWeb, logosPlanningCenter } from "../emoji_picker/custom_emojis"
+import { baseURL } from "../config"
 
 interface LinkFormProps {
   initialLink?: Link
@@ -18,6 +20,8 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
   const [displayName, setDisplayName] = useState(initialLink?.displayName || "")
   const [url, setUrl] = useState(initialLink?.url || "")
   const [attemptedSubmit, setAttemptedSubmit] = useState(false)
+  const [iconLoading, setIconLoading] = useState(false)
+  const prevUrlRef = useRef<string>("")
   const generatedId = uuid()
 
   useEffect(() => {
@@ -37,6 +41,23 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
   const isValidUrl = urlPattern.test(url)
   const isFullUrl = protocolPattern.test(url)
 
+  const attemptToMatchLogoFromUrl = (urlString: string) => {
+    setIconLoading(true)
+    const allLogos = [logosWeb, logosPlanningCenter].flatMap((group) => group)
+    allLogos.forEach((logo) => {
+      if (logo.domains.some((domain) => urlString.includes(domain.trim()))) {
+        setIcon({
+          name: logo.name,
+          type: "image",
+          file: `${baseURL}${logo.file}`,
+        })
+      }
+    })
+    setTimeout(() => {
+      setIconLoading(false)
+    }, 200)
+  }
+
   return (
     <StackView
       axis="horizontal"
@@ -51,7 +72,11 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
         <Input.InputLabel size="14px" fontWeight={500}>
           Icon
         </Input.InputLabel>
-        <LinkIconDropdown icon={icon} setIcon={setIcon} />
+        <LinkIconDropdown
+          icon={icon}
+          setIcon={setIcon}
+          isLoading={iconLoading}
+        />
       </StackView>
       <StackView axis="vertical" spacing={2} flex={1}>
         <StackView axis="vertical" spacing={0.5}>
@@ -69,6 +94,12 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
                 setUrl(e.target.value)
                 if (attemptedSubmit) {
                   setAttemptedSubmit(false)
+                }
+              }}
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                if (e.target.value !== prevUrlRef.current) {
+                  prevUrlRef.current = e.target.value
+                  attemptToMatchLogoFromUrl(e.target.value)
                 }
               }}
             />

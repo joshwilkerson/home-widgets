@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Button, StackView, Popover, Box } from "@planningcenter/tapestry-react"
+import {
+  Button,
+  StackView,
+  Popover,
+  Box,
+  Spinner,
+} from "@planningcenter/tapestry-react"
 import { token } from "@planningcenter/tapestry"
 import { EmojiPicker } from "../emoji_picker"
 import type { Emoji } from "../emoji_picker"
@@ -9,6 +15,7 @@ import { defaultLinkIcon, type Link } from "../quick_links"
 interface LinkIconDropdownProps {
   icon: Link["icon"]
   setIcon: (icon: Link["icon"]) => void
+  isLoading?: boolean
 }
 
 const useOutsideClick = (
@@ -30,7 +37,11 @@ const useOutsideClick = (
   }, [refs, callback])
 }
 
-export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
+export const LinkIconDropdown = ({
+  icon,
+  setIcon,
+  isLoading = false,
+}: LinkIconDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const popoverRef = useRef<HTMLDivElement>(null)
@@ -47,6 +58,20 @@ export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
     setIsOpen(false)
   }
 
+  const renderIconContent = () => {
+    if (isLoading) {
+      return <Spinner size="sm" thickness={2} />
+    }
+    if (!icon.name) {
+      return defaultLinkIcon.name
+    }
+    return icon.type === "emoji" ? (
+      <Box>{icon.name}</Box>
+    ) : (
+      <DisplayImage src={icon.file || ""} alt={icon.name} size="16px" />
+    )
+  }
+
   return (
     <Box ref={containerRef}>
       <Popover
@@ -59,17 +84,9 @@ export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
               name: isOpen ? "general.upCaret" : "general.downCaret",
             }}
             height={4}
+            disabled={isLoading}
           >
-            {!icon.name && defaultLinkIcon.name}
-            {icon.type === "emoji" ? (
-              <Box>{icon.name}</Box>
-            ) : (
-              <DisplayImage
-                src={icon.file ? icon.file : ""}
-                alt={icon.name}
-                size="16px"
-              />
-            )}
+            {renderIconContent()}
           </Button>
         }
         open={isOpen}
