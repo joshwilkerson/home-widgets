@@ -76,7 +76,12 @@ export const logosWeb = [
     keywords: ["apple", "music"],
     domains: ["music.apple.com"],
   },
-
+  {
+    name: "Basecamp",
+    file: "/basecamp.png",
+    keywords: ["basecamp"],
+    domains: ["basecamp.com"],
+  },
   {
     name: "Dropbox",
     file: "/dropbox.png",
@@ -130,6 +135,12 @@ export const logosWeb = [
     file: "/youtube.png",
     keywords: ["youtube"],
     domains: ["youtube.com"],
+  },
+  {
+    name: "Wordpress",
+    file: "/wordpress.png",
+    keywords: ["wordpress"],
+    domains: ["wordpress.com", "wordpress.org"],
   },
   {
     name: "Zoom",
