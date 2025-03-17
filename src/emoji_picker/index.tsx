@@ -2,14 +2,19 @@ import React from "react"
 import { Box } from "@planningcenter/tapestry-react"
 import data from "@emoji-mart/data"
 import Picker from "@emoji-mart/react"
+import { customEmojis } from "./custom_emojis"
 
 export type Emoji = {
   id: string
   name: string
-  native: string
-  unified: string
-  keywords: string[]
-  shortcodes: string
+  native?: string
+  keywords?: string[]
+}
+
+const customCategoryIcons = {
+  web: {
+    src: "/custom-tab.svg",
+  },
 }
 
 export const EmojiPicker = ({ onChange }: { onChange: (e: Emoji) => void }) => {
@@ -28,7 +33,17 @@ export const EmojiPicker = ({ onChange }: { onChange: (e: Emoji) => void }) => {
       <Picker
         data={data}
         onEmojiSelect={onChange}
+        searchPosition="static"
+        previewPosition="none"
+        noCountryFlags={true}
+        noResultsEmoji="thinking_face"
+        theme="light"
+        autoFocus={true}
+        custom={customEmojis}
+        categoryIcons={customCategoryIcons}
         categories={[
+          "planning-center",
+          "web",
           "people",
           "nature",
           "foods",
@@ -38,10 +53,6 @@ export const EmojiPicker = ({ onChange }: { onChange: (e: Emoji) => void }) => {
           "symbols",
           "flags",
         ]}
-        noCountryFlags={true}
-        noResultsEmoji="thinking_face"
-        theme="light"
-        autoFocus={true}
       />
     </Box>
   )

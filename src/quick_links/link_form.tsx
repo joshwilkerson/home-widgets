@@ -12,7 +12,9 @@ interface LinkFormProps {
 }
 
 export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
-  const [icon, setIcon] = useState(initialLink?.icon?.name || "")
+  const [icon, setIcon] = useState<Link["icon"]>(
+    initialLink?.icon || { name: "", type: "emoji" }
+  )
   const [displayName, setDisplayName] = useState(initialLink?.displayName || "")
   const [url, setUrl] = useState(initialLink?.url || "")
   const [attemptedSubmit, setAttemptedSubmit] = useState(false)
@@ -21,6 +23,7 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
   const urlPattern =
     /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i
   const isValidUrl = urlPattern.test(url)
+
   const canSave = displayName !== "" && url !== ""
 
   return (
@@ -91,7 +94,7 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
             }
             const newLink: Link = {
               id: initialLink?.id || generatedId,
-              icon: { name: icon || link_icons[0], type: "emoji" },
+              icon,
               displayName,
               url,
             }

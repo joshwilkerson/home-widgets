@@ -4,6 +4,11 @@ import { token } from "@planningcenter/tapestry"
 import { EmojiPicker } from "../emoji_picker"
 import type { Emoji } from "../emoji_picker"
 
+interface LinkIconDropdownProps {
+  icon: { name: string; type: "emoji" | "image" }
+  setIcon: (icon: { name: string; type: "emoji" | "image" }) => void
+}
+
 const useOutsideClick = (
   refs: React.RefObject<HTMLElement | null>[],
   callback: () => void
@@ -23,13 +28,7 @@ const useOutsideClick = (
   }, [refs, callback])
 }
 
-export const LinkIconDropdown = ({
-  icon,
-  setIcon,
-}: {
-  icon: string
-  setIcon: (icon: string) => void
-}) => {
+export const LinkIconDropdown = ({ icon, setIcon }: LinkIconDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const popoverRef = useRef<HTMLDivElement>(null)
@@ -37,7 +36,11 @@ export const LinkIconDropdown = ({
   useOutsideClick([containerRef, popoverRef], () => setIsOpen(false))
 
   const handleEmojiSelect = (e: Emoji) => {
-    setIcon(e.native)
+    if (e.native !== undefined) {
+      setIcon({ name: e.native, type: "emoji" })
+    } else {
+      setIcon({ name: e.id, type: "image" })
+    }
     setIsOpen(false)
   }
 
@@ -47,7 +50,7 @@ export const LinkIconDropdown = ({
         anchorElement={
           <Button
             onClick={() => setIsOpen(!isOpen)}
-            title={icon || "🔗"}
+            title={icon.name || "🔗"}
             theme="default"
             variant="outline"
             iconRight={{
