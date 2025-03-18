@@ -126,11 +126,25 @@ export const LinkForm = ({ initialLink, onSave, onCancel }: LinkFormProps) => {
         </StackView>
       </StackView>
       <StackView axis="horizontal" spacing={1} paddingTop={3}>
-        <Button title="Cancel" onClick={onCancel} />
+        <Button
+          title="Cancel"
+          tooltip={{ title: "Cancel", placement: "top" }}
+          onClick={onCancel}
+          icon={{ name: "general.x" }}
+        />
         <Button
           title="Save"
+          tooltip={
+            canSave
+              ? {
+                  title: initialLink ? "Update link" : "Add link",
+                  placement: "top",
+                }
+              : undefined
+          }
           theme="primary"
           disabled={!canSave}
+          icon={{ name: "general.check" }}
           onClick={() => {
             if (!isValidUrl) {
               setAttemptedSubmit(true)
