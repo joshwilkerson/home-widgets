@@ -22,7 +22,7 @@ export const Widget = ({ content, id, title, type }: Widget) => {
     <WidgetWrapper>
       <WidgetHeader title={title} onEditClick={() => openModalForEdit(id)} />
 
-      <WidgetBody>
+      <WidgetBody isScrollable={true}>
         {type === "notepad" ? (
           <NotepadWidget content={content as string} />
         ) : (
