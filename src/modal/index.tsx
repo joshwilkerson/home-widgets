@@ -116,7 +116,10 @@ export const Modal = ({
 
   return (
     <TRModal open={true} onRequestClose={onClose} maxWidth="800px">
-      <ModalHeader onClose={onClose} title="Configure widget">
+      <ModalHeader
+        onClose={widgetTitle && widgetContent ? handleSave : onClose}
+        title="Configure widget"
+      >
         <StackView
           axis="horizontal"
           alignment="center"
@@ -141,7 +144,7 @@ export const Modal = ({
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  setWidgetTitle("")
+                  setWidgetTitle("Notepad")
                   setWidgetType("notepad")
                 }}
               />
@@ -151,7 +154,7 @@ export const Modal = ({
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  setWidgetTitle("")
+                  setWidgetTitle("Quick Links")
                   setWidgetType("quick_links")
                 }}
               />
@@ -179,30 +182,38 @@ export const Modal = ({
         </StackView>
       </ModalBody>
       <ModalFooter>
-        {widgetId && (
-          <Button
-            title="Remove widget"
-            theme="delete"
-            variant="outline"
-            marginRight="auto"
-            onClick={() => {
-              removeWidget(widgetId)
-              onClose()
-            }}
-          />
+        {isLoading ? (
+          <Box height={4} />
+        ) : widgetId ? (
+          <>
+            <Button
+              title="Remove widget"
+              theme="delete"
+              variant="outline"
+              marginRight="auto"
+              onClick={() => {
+                removeWidget(widgetId)
+                onClose()
+              }}
+            />
+            <Button title="Done" theme="primary" onClick={handleSave} />
+          </>
+        ) : (
+          <>
+            <Button
+              title="Cancel"
+              theme="default"
+              variant="naked"
+              onClick={onClose}
+            />
+            <Button
+              title={`${widgetId ? "Update" : "Add"} widget`}
+              theme="primary"
+              onClick={handleSave}
+              disabled={!widgetType || isLoading || !widgetTitle}
+            />
+          </>
         )}
-        <Button
-          title="Cancel"
-          theme="default"
-          variant="naked"
-          onClick={onClose}
-        />
-        <Button
-          title={`${widgetId ? "Update" : "Add"} widget`}
-          theme="primary"
-          onClick={handleSave}
-          disabled={!widgetType || isLoading || !widgetTitle || !widgetContent}
-        />
       </ModalFooter>
     </TRModal>
   )
