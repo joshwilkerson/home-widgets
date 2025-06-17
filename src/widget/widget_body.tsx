@@ -1,16 +1,17 @@
 import React from "react"
 import { Box } from "@planningcenter/tapestry-react"
+import { ScrollWrapper } from "../scroll_wrapper"
 
-export const WidgetBody = ({ children }: { children: React.ReactNode }) => {
+export const WidgetBody = ({
+  children,
+  isScrollable,
+}: {
+  children: React.ReactNode
+  isScrollable?: boolean
+}) => {
   return (
-    <Box
-      marginVertical={2}
-      paddingHorizontal={2}
-      height="340px"
-      maxHeight="340px"
-      overflow="auto"
-    >
-      {children}
+    <Box maxHeight="320px" paddingHorizontal={!isScrollable ? 2 : 0} flex={1}>
+      {isScrollable ? <ScrollWrapper>{children}</ScrollWrapper> : children}
     </Box>
   )
 }
